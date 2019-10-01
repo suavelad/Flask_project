@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head class="head">  
+        <title>Python Tips</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">    
+    </head>
+    <header class="header">
+            <h2 >Python Tweet Tips</h2>
+    </header>
+    <body>
+        <div id='container' style="overflow-x:auto;">
+            <table >
+                <tr>
+                    <th>Tweets</th>
+                    <th>Posted By</th>
+                    <th>Tweet link</th>
+                    <th>Date/Time</th>
+                    <th>Retweets</th>
+                    <th>Likes</th>
+                    <th>Delete State</th>
+                </tr>
+                {% for tweet in tweets %}
+                <tr>
+                    <td>{{tweet.python_tip}}</td>
+                    <td>{{tweet.who_posted}}</td>
+                    <td></td>
+                    <!-- <td>{{tweet.link}}</td> -->
+                    <td>{{tweet.date_time}}</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <form method="POST" action="./delete">
+                            <input type="hidden" value="{{tweet.date_time}}" name='date_time'>
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% if tweets.has_prev %}<a href="{{ url_for('index', page=tweets.prev_num) }}">&lt;&lt; Newer posts</a>{% else %}&lt;&lt; Newer posts{% endif %} | 
+                {% if tweets.has_next %}<a href="{{ url_for('index', page=tweets.next_num) }}">Older posts &gt;&gt;</a>{% else %}Older posts &gt;&gt;{% endif %}
+
+            </table>
+        </div>
+        <footer> 
+            <p> Python Tweet Tips (c) 2019 | Project by: Sunday Ajayi</p>
+        </footer>
+   </body>
+</html>
