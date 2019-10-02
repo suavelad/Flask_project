@@ -4,6 +4,7 @@ import pandas as pd
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
+# from flask_paginate import Pagination, get_page_parameter
 
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
@@ -43,10 +44,11 @@ class Tweets(db.Model):
 # Set "homepage" to index.html
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    csv_path = '/home/s/Documents/Projects/Challenge1/python_tip_tweets.csv'
+    csv_path = '/home/s/Documents/Projects/Python Projects/Challenge1/python_tip_tweets.csv'
     df=pd.read_csv(csv_path)
     df.rename(columns={"Timestamp":"datetime","Python Tip:":"tips","Your name or Twitter id:":"handle"},inplace=True)
     df.dropna(subset=['datetime','handle'],axis=0, inplace=True)
+    # page = request.args.get(get_page_parameter(), type=int, default=1)
 
     # if (request.form):
     #     tweeting = Tweets(
@@ -70,6 +72,8 @@ def index():
             db.session().rollback()
 
     tweets = Tweets.query.all()
+    # pagination = Pagination(page=page, total=tweets.count(1),  record_name='tweets')
+
     return render_template('index.html', tweets=tweets)
 
 
@@ -83,4 +87,4 @@ def delete():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8045)
+    app.run(debug=True, port=8000)

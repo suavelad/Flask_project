@@ -11,6 +11,7 @@
         <div id='container' style="overflow-x:auto;">
             <table >
                 <tr>
+
                     <th>Tweets</th>
                     <th>Posted By</th>
                     <th>Tweet link</th>
@@ -19,7 +20,7 @@
                     <th>Likes</th>
                     <th>Delete State</th>
                 </tr>
-                {% for tweet in tweets %}
+                {%for tweet in tweets%}
                 <tr>
                     <td>{{tweet.python_tip}}</td>
                     <td>{{tweet.who_posted}}</td>
@@ -36,10 +37,11 @@
                     </td>
                 </tr>
                 {% endfor %}
-                {% if tweets.has_prev %}<a href="{{ url_for('index', page=tweets.prev_num) }}">&lt;&lt; Newer posts</a>{% else %}&lt;&lt; Newer posts{% endif %} | 
-                {% if tweets.has_next %}<a href="{{ url_for('index', page=tweets.next_num) }}">Older posts &gt;&gt;</a>{% else %}Older posts &gt;&gt;{% endif %}
+                <!-- {% if tweets.has_prev %}<a href="{{ url_for('index', page=tweets.prev_num) }}">&lt;&lt; Newer posts</a>{% else %}&lt;&lt; Newer posts{% endif %} | 
+                {% if tweets.has_next %}<a href="{{ url_for('index', page=tweets.next_num) }}">Older posts &gt;&gt;</a>{% else %}Older posts &gt;&gt;{% endif %} -->
 
             </table>
+
         </div>
         <footer> 
             <p> Python Tweet Tips (c) 2019 | Project by: Sunday Ajayi</p>
